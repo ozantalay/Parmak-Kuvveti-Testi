@@ -8,6 +8,9 @@ export default function App() {
   const timeToDisplay = (timeCount / 100).toFixed(2)
 
   /*------ Eksik state'leri aşağıya ekleyin----------------------------*/
+  const [cursorInButton,setCursorInButton]=useState(false)
+  const [buttonHeldDown, setButtonHeldDown] = useState(false)
+
 
   /*------Yukarıdaya eksik state'leri ekleyin----------------------------*/
 
@@ -25,6 +28,18 @@ export default function App() {
 		   
 		Bonus Challenge: Dört olayın tamamını sadece iki - hatta sadece bir - fonksiyonla halledip halledemeyeceğinizi deneyin
 */
+const handleMouseEnter=()=>{
+  setCursorInButton(true)
+}
+const handleMouseLeave=()=>{
+  setCursorInButton(false)
+}
+const handleMouseUp=()=>{
+  setButtonHeldDown(false)
+}
+const handleMouseDown=()=>{
+  setButtonHeldDown(true)
+}
 
   try {
     useEffect(() => {
@@ -53,7 +68,12 @@ export default function App() {
     <div className='wrapper'>
       <Header time={+timeToDisplay} />
       <Thermometer time={+timeToDisplay} />
-      <button className={buttonClass}>Basılı Tut</button>
+      <button className={buttonClass}
+      onMouseEnter={handleMouseEnter}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      >Basılı Tut</button>
       <p className='time'>{timeToDisplay} saniye </p>
     </div>
   )
